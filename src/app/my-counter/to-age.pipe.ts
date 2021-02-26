@@ -2,11 +2,11 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { Person } from "../app.model";
 
 @Pipe({
-  name: "toAge"
+  name: "formatPerson"
 })
-export class ToAgePipe implements PipeTransform {
+export class FormatPersonPipe implements PipeTransform {
   transform(value: Person): string {
-    // value.name = "x";
+    value.name = value.name.toUpperCase();
     return value.name + ' is ' + value.age + ' years old' ;
   }
 }

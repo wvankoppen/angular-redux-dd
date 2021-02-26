@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Person } from '../app.model';
-import { increment, decrement, reset } from '../counter.actions';
+import { increment, decrement, sendEmail } from '../counter.actions';
 
 @Component({
   selector: 'app-my-counter',
@@ -12,8 +12,14 @@ import { increment, decrement, reset } from '../counter.actions';
 export class MyCounterComponent {
   person$: Observable<Person>;
 
-  constructor(private store: Store<{ person: Person }>) {
-    this.person$ = store.select(s => s.person);
+  constructor(private store: Store< {user:Person} >) {
+    this.person$ = store.select(s => s.user);
+
+    this.person$.subscribe(p => {
+      if (p.age === 40) {
+        this.store.dispatch(sendEmail());
+      }
+    });
   }
 
   increment() {

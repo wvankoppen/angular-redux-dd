@@ -1,16 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './counter.reducer';
+import { userReducer } from './userReducer';
 import { MyCounterComponent } from './my-counter/my-counter.component';
-import { ToAgePipe } from './my-counter/to-age.pipe';
+import { FormatPersonPipe } from './my-counter/to-age.pipe';
+
+export const STORE_CONFIG = {
+  runtimeChecks: {
+    strictStateImmutability: false,
+    strictActionImmutability: false,
+    strictStateSerializability: false,
+    strictActionSerializability: false,
+  },
+};
+
 
 @NgModule({
-  declarations: [AppComponent, MyCounterComponent, ToAgePipe],
-  imports: [BrowserModule, StoreModule.forRoot({ person: counterReducer })],
+  declarations: [AppComponent, MyCounterComponent, FormatPersonPipe],
+  imports: [BrowserModule, StoreModule.forRoot({ user: userReducer }, STORE_CONFIG), [
+    StoreDevtoolsModule.instrument({
+      maxAge: 200,
+    }),
+  ]],
   providers: [],
   bootstrap: [AppComponent],
 })
