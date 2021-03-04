@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { UserEffects } from './state/user.effects';
 import { userReducer } from './state/user.reducer';
 import { UserComponent } from './user.component';
-import { FormatPersonPipe } from './pipes/to-age.pipe';
+import { FormatUserPipe } from './pipes/format-user.pipe';
 
 export const STORE_CONFIG = {
   runtimeChecks: {
@@ -22,7 +22,7 @@ export const STORE_CONFIG = {
 
 
 @NgModule({
-  declarations: [AppComponent, UserComponent, FormatPersonPipe],
+  declarations: [AppComponent, UserComponent, FormatUserPipe],
   imports: [BrowserModule,EffectsModule.forRoot([UserEffects]),StoreModule.forRoot({ user: userReducer }, STORE_CONFIG), [
     StoreDevtoolsModule.instrument({
       maxAge: 200,

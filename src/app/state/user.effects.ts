@@ -14,11 +14,12 @@ export class UserEffects {
         private store$: Store<UserState>,
 
     ) {}
-    logAge$ = createEffect(
-        () => this.actions$.pipe(
-            ofType(incrementAge),
-            withLatestFrom(this.store$),
-            tap(([action,state]) => console.log('Action is fired!', action, state.user.age))
-        ),
-        { dispatch: false }
-);}
+    // logAge$ = createEffect(
+    //     () => this.actions$.pipe(
+    //         ofType(incrementAge),
+    //         withLatestFrom(this.store$),
+    //         tap(([action,state]) => console.log('Action is fired!', action, state.user.age))
+    //     ),
+    //     { dispatch: false }
+    // );
+}

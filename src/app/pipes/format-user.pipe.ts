@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { User } from "../app.model";
 
 @Pipe({
-  name: "formatPerson"
+  name: "formatUser"
 })
-export class FormatPersonPipe implements PipeTransform {
+export class FormatUserPipe implements PipeTransform {
 
   // Oops: transformation is not a pure function!
   transform(value: User): string {

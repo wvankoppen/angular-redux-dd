@@ -10,8 +10,8 @@ import { incrementAge, decrementAge, sendAnniversaryEmail } from './state/user.a
     <button id="increment" (click)="increment()">Increment age</button>
     <button id="decrement" (click)="decrement()">Decrement age</button>
 
-    <div>{{ user$ | async | formatPerson }}</div>
-    <div>{{ user$ | async | json }}</div>
+    <p>Formatted by pipe: {{ user$ | async | formatUser }}</p>
+    <p>State: {{ user$ | async | json }}</p>
 
   `})
 export class UserComponent {
