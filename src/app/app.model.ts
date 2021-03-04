@@ -1,8 +1,8 @@
-export interface Person {
+export interface User {
   name: string
   age: number
 }
 
 export interface UserState {
-  user: Person
+  user: User
 }

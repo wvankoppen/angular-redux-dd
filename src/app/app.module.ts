@@ -5,9 +5,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 
 import { StoreModule } from '@ngrx/store';
-import { userReducer } from './userReducer';
-import { MyCounterComponent } from './my-counter/my-counter.component';
-import { FormatPersonPipe } from './my-counter/to-age.pipe';
+import { userReducer } from './state/user.reducer';
+import { UserComponent } from './user.component';
+import { FormatPersonPipe } from './pipes/to-age.pipe';
 
 export const STORE_CONFIG = {
   runtimeChecks: {
@@ -20,7 +20,7 @@ export const STORE_CONFIG = {
 
 
 @NgModule({
-  declarations: [AppComponent, MyCounterComponent, FormatPersonPipe],
+  declarations: [AppComponent, UserComponent, FormatPersonPipe],
   imports: [BrowserModule, StoreModule.forRoot({ user: userReducer }, STORE_CONFIG), [
     StoreDevtoolsModule.instrument({
       maxAge: 200,
@@ -30,9 +30,3 @@ export const STORE_CONFIG = {
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-
-/*
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://github.com/ngrx/platform
-*/
