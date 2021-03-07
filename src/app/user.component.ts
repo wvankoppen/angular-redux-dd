@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { User } from './app.model';
-import { incrementAge, decrementAge, sendAnniversaryEmail } from './state/user.actions';
+import { User } from './state/user.state';
+import { decrementUserAge, incrementUserAge, celebrateAnniversary, initializeUser } from './state/user.actions';
 
 @Component({
   selector: 'app-user',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <button id="increment" (click)="increment()">Increment age</button>
-    <button id="decrement" (click)="decrement()">Decrement age</button>
-
-    <p>Formatted by pipe: {{ user$ | async | formatUser }}</p>
-    <p>State: {{ user$ | async | json }}</p>
+    <button (click)="initialize()">Initialize</button>
+    <p>
+      <button (click)="increment()">Increment age</button>
+      <button (click)="decrement()">Decrement age</button>
+    </p>
+    <h3>Current user</h3>
+    <p>{{ user$ | async | formatUser }}</p>
 
   `})
 export class UserComponent {
@@ -19,19 +22,17 @@ export class UserComponent {
 
   constructor(private store: Store< {user:User} >) {
     this.user$ = store.select(s => s.user);
+  }
 
-    this.user$.subscribe(u => {
-      if (u.age === 40) {
-        this.store.dispatch(sendAnniversaryEmail());
-      }
-    });
+  initialize() {
+    this.store.dispatch(initializeUser());
   }
 
   increment() {
-    this.store.dispatch(incrementAge());
+    this.store.dispatch(incrementUserAge());
   }
 
   decrement() {
-    this.store.dispatch(decrementAge());
+    this.store.dispatch(decrementUserAge());
   }
 }

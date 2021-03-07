@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
@@ -23,7 +24,9 @@ export const STORE_CONFIG = {
 
 @NgModule({
   declarations: [AppComponent, UserComponent, FormatUserPipe],
-  imports: [BrowserModule,EffectsModule.forRoot([UserEffects]),StoreModule.forRoot({ user: userReducer }, STORE_CONFIG), [
+  imports: [BrowserModule, HttpClientModule,
+    EffectsModule.forRoot([UserEffects]),
+    StoreModule.forRoot({ user: userReducer }, STORE_CONFIG), [
     StoreDevtoolsModule.instrument({
       maxAge: 200,
     }),

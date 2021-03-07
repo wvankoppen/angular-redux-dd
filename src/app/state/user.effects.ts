@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { tap, withLatestFrom } from 'rxjs/operators';
-import { UserState } from '../app.model';
-import { incrementAge } from './user.actions';
+import { of } from 'rxjs';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { UserService } from '../user.service';
+import { UserState } from './user.state';
+import { incrementUserAge, initializeUser, initializeUserError, initializeUserSuccess } from './user.actions';
 
 @Injectable({
     providedIn: 'root',
@@ -12,14 +14,27 @@ export class UserEffects {
     constructor(
         private actions$: Actions,
         private store$: Store<UserState>,
+        private userService: UserService,
 
     ) {}
-    // logAge$ = createEffect(
-    //     () => this.actions$.pipe(
-    //         ofType(incrementAge),
-    //         withLatestFrom(this.store$),
-    //         tap(([action,state]) => console.log('Action is fired!', action, state.user.age))
-    //     ),
-    //     { dispatch: false }
-    // );
+
+    initializeUser$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(initializeUser),
+            switchMap((action) =>
+                this.userService.getUser()
+            ),
+            map(user => initializeUserSuccess(user)),
+            catchError(user => of(initializeUserError(user)))
+        ),
+    );
+
+    logAge$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(incrementUserAge),
+            withLatestFrom(this.store$),
+            tap(([action,state]) => console.log('Action is fired!', action, state.user.age))
+        ),
+        { dispatch: false }
+    );
 }

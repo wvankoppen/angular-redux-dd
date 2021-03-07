@@ -1,14 +1,16 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { User } from "../app.model";
+import { User } from "../state/user.state";
 
 @Pipe({
   name: "formatUser"
 })
 export class FormatUserPipe implements PipeTransform {
 
-  // Oops: transformation is not a pure function!
+  // Make sure transformation is a pure function!
   transform(value: User): string {
-    value.name = value.name[0].toUpperCase() + value.name.substring(1);
-    return value.name + ' is ' + value.age + ' years old' ;
+    if (!value) {
+      return '<empty>';
+    }
+    return value.name[0].toUpperCase() + value.name.substring(1) + ' is ' + value.age + ' years old' ;
   }
 }
