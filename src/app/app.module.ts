@@ -21,16 +21,19 @@ export const STORE_CONFIG = {
   },
 };
 
-
 @NgModule({
   declarations: [AppComponent, UserComponent, FormatUserPipe],
-  imports: [BrowserModule, HttpClientModule,
+  imports: [
+    BrowserModule,
+    HttpClientModule,
     EffectsModule.forRoot([UserEffects]),
-    StoreModule.forRoot({ user: userReducer }, STORE_CONFIG), [
-    StoreDevtoolsModule.instrument({
-      maxAge: 200,
-    }),
-  ]],
+    StoreModule.forRoot({ user: userReducer }, STORE_CONFIG),
+    [
+      StoreDevtoolsModule.instrument({
+        maxAge: 200,
+      }),
+    ],
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
