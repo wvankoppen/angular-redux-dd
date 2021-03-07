@@ -1,0 +1,5 @@
+/dist/
+/node_modules/
+/.idea/angular-redux-dd.iml
+/.idea/modules.xml
+/.idea/vcs.xml
