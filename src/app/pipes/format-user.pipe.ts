@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { User } from '../state/user.state';
+import { User } from '../state/user.model';
 
 @Pipe({
   name: 'formatUser',

@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { User } from "./state/user.state";
-import { celebrateBirthday, initializeUser } from "./state/user.actions";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { celebrateBirthday, initializeUser } from './state/user.actions';
+import { User } from './state/user.model';
 
 @Component({
-  selector: "app-user",
+  selector: 'app-user',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button (click)="initialize()">Initialize</button>
@@ -22,8 +22,6 @@ export class UserComponent {
 
   constructor(private store: Store<{ user: User }>) {
     this.user$ = store.select((s) => s.user);
-
-
   }
 
   initialize() {

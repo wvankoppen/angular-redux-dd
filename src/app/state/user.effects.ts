@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { UserService } from '../user.service';
-import { UserState } from './user.state';
+import { UserState } from './user.model';
 import { celebrateBirthday, initializeUser, initializeUserError, initializeUserSuccess } from './user.actions';
 
 @Injectable({
