@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { User } from "./state/user.state";
-import { decrementUserAge, incrementUserAge, initializeUser } from "./state/user.actions";
+import { celebrateBirthday, initializeUser } from "./state/user.actions";
 
 @Component({
   selector: "app-user",
@@ -10,12 +10,11 @@ import { decrementUserAge, incrementUserAge, initializeUser } from "./state/user
   template: `
     <button (click)="initialize()">Initialize</button>
 
-    <p>
-      <button (click)="increment()">Increment age</button>
-      <button (click)="decrement()">Decrement age</button>
-    </p>
     <h3>Current user</h3>
     <p>{{ user$ | async | formatUser }}</p>
+    <p>
+      <button (click)="celebrateBirthday()">Celebrate birthday</button>
+    </p>
   `,
 })
 export class UserComponent {
@@ -23,17 +22,15 @@ export class UserComponent {
 
   constructor(private store: Store<{ user: User }>) {
     this.user$ = store.select((s) => s.user);
+
+
   }
 
   initialize() {
     this.store.dispatch(initializeUser());
   }
 
-  increment() {
-    this.store.dispatch(incrementUserAge());
-  }
-
-  decrement() {
-    this.store.dispatch(decrementUserAge());
+  celebrateBirthday() {
+    this.store.dispatch(celebrateBirthday());
   }
 }
