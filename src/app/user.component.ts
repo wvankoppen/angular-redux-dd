@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { celebrateBirthday, initializeUser } from './state/user.actions';
-import { User } from './state/user.model';
+import { User, UserState } from "./state/user.model";
 
 @Component({
   selector: 'app-user',
@@ -20,7 +20,7 @@ import { User } from './state/user.model';
 export class UserComponent {
   user$: Observable<User>;
 
-  constructor(private store: Store<{ user: User }>) {
+  constructor(private store: Store<UserState>) {
     this.user$ = store.select((s) => s.user);
   }
 
