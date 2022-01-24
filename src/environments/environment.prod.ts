@@ -1,7 +1,6 @@
 export const environment = {
-  production: true
+    production: true,
 };
-
 
 /*
 Use of this source code is governed by an MIT-style license that

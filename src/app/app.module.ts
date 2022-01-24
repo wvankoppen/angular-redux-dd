@@ -8,9 +8,9 @@ import { UserComponent } from './user.component';
 import { FormatUserPipe } from './pipes/format-user.pipe';
 
 @NgModule({
-  declarations: [AppComponent, UserComponent, FormatUserPipe],
-  imports: [BrowserModule, HttpClientModule, UserStateModule],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, UserComponent, FormatUserPipe],
+    imports: [BrowserModule, HttpClientModule, UserStateModule],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

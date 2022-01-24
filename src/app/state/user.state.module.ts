@@ -6,24 +6,24 @@ import { UserEffects } from './user.effects';
 import { userReducer } from './user.reducer';
 
 export const STORE_CONFIG = {
-  runtimeChecks: {
-    strictStateImmutability: false,
-    strictActionImmutability: false,
-    strictStateSerializability: false,
-    strictActionSerializability: false,
-  },
+    runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+    },
 };
 
 @NgModule({
-  declarations: [],
-  imports: [
-    EffectsModule.forRoot([UserEffects]),
-    StoreModule.forRoot({ user: userReducer }, STORE_CONFIG),
-    [
-      StoreDevtoolsModule.instrument({
-        maxAge: 200,
-      }),
+    declarations: [],
+    imports: [
+        StoreModule.forRoot({ user: userReducer }, STORE_CONFIG),
+        EffectsModule.forRoot([UserEffects]),
+        [
+            StoreDevtoolsModule.instrument({
+                maxAge: 200,
+            }),
+        ],
     ],
-  ],
 })
 export class UserStateModule {}
