@@ -10,7 +10,8 @@ export class FormatUserPipe implements PipeTransform {
         if (!value) {
             return '<empty>';
         }
-        value.name = value.name[0].toUpperCase() + value.name.substring(1);
+        // Mutation is a problem!
+        // value.name = value.name[0].toUpperCase() + value.name.substring(1);
         return value.name + ' is ' + value.age + ' years old';
     }
 }
